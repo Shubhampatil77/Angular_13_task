@@ -1,0 +1,36 @@
+.main { height: 100%; width: 100%; margin: 0; padding: 0; }
+.header { padding: 15px; /* height: 30px; */
+    background-color: blue; }
+.btn { margin-left: 50px; background-color: blue; color: white; border: 0cap; font-size: large; }
+.bank-account-container { display: flex; justify-content: space-between; padding: 20px; }
+.left-side { background-color: #044c9d; width: 215px; border-right: 1px solid #ddd; padding-right: 10px; padding-left: 10px; color: white; min-height: 580px; max-height: auto; }
+.repet-class { width: 100%; }
+.repet-class:hover,
+  .repet-class.selected { background-color: #b227274e; }
+.repet-class + .repet-class { margin-top: 0; }
+.account-info { display: flex; flex-direction: column; margin: 0; padding: 0; }
+.tab-container { display: flex; flex-direction: column; align-items: flex-start; }
+mat-tab-group { display: flex; flex-direction: column; width: 100%; }
+.mat-tab-label { width: 30px; background-color: #28a745; }
+.mat-tab-label-content { justify-content: flex-start; background-color: #28a745; }
+.bank-info { margin-top: 20px; }
+.bank-info h3 { margin-bottom: 10px; }
+.manage-btn { color: rgb(3, 184, 255); border: none; padding: 25px; cursor: pointer; }
+.right-side { width: 90%; padding-left: 20px; /* background-color: #28a745; */ }
+label { margin-left:10px }
+.filter-section { display: flex; align-items: center; /* justify-content: space-between; */
+    margin-bottom: 10px; margin-top: 10px; }
+.filter-section label { margin-left: 50px; }
+.filter-section input, .filter-section select { margin-left: 100px; padding: 5px; }
+.download-btn { background-color: #28a745; color: white; border: none; padding: 10px; cursor: pointer; }
+.transaction-container { display: flex; flex-direction: column; width: 100%; min-height: 500px; /* border: 1px solid #ddd; */
+    /* background-color: #28a745; */ }
+.transaction-header, .transaction-body { display: flex; flex-direction: column; }
+.transaction-row { display: flex; width: 100%; }
+.transaction-cell { flex: 1; padding: 8px; border-bottom: 1px solid #ddd; text-align: right; }
+.transaction-header .transaction-row { background-color: #ffffff; /* font-weight: bold; */
+    color: blue; }
+.transaction-body .transaction-row:nth-child(even) { background-color: #f9f9f9; }
+i.fa-comment { cursor: pointer; margin-right: 8px; }
+span { font-size: 14px; color: #333; }
+.addentry { color: rgb(255, 255, 255); background-color: rgb(18, 162, 229); width: 150px; height: 30px; padding: 5px; border: none; cursor: pointer; }

@@ -1,0 +1,64 @@
+<div class="main">
+  <div class="header">
+    <h2>Edit Bank Account</h2>
+
+      <button mat-raised-button (click)="onSubmit()"  [disabled]="bankForm.invalid">Update</button>
+      
+    </div>
+
+  <form [formGroup]="bankForm" (ngSubmit)="onSubmit()">
+    <div class="add-bank-account-container">
+      <div class="left-side">
+        <mat-form-field appearance="fill">
+          <mat-label>search your Bank</mat-label>
+          <input matInput placeholder="Type your bank name" formControlName="bank_name"  value="{{account.bank_name}}"  (input)="searchBank($event)" />
+          <!-- [(ngModel)]="selectedBankName"  -->
+        <mat-error *ngIf="bankForm.get('bank_name')?.hasError('required') && bankForm.get('bank_name')?.touched">
+          Please enter Bank Name .
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="banks && banks.length > 0">
+      <mat-list>
+        <mat-list-item *ngFor="let bank of banks" (click)="selectBank(bank)">
+          <p style="cursor: pointer;">{{ bank.bank_name }}</p>
+          
+        </mat-list-item>
+      </mat-list>
+      <input type="hidden" formControlName="bank_id" />
+    </div>
+        <div>
+          <label>Account Type:</label>
+          <mat-radio-group formControlName="account_type" [(ngModel)]="account.account_type" >
+            <mat-radio-button value="saving">Saving</mat-radio-button>
+            <mat-radio-button value="current">Current</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <mat-checkbox 
+        formControlName="is_primary" 
+        (change)="togglePrimaryAccount($event)" 
+        [checked]="account.is_primary === 'yes'"
+        [disabled]="isPrimaryDisabled()"> 
+        <!-- Ensure this checks for 'yes' -->
+        Primary Account
+    </mat-checkbox>
+    
+
+      </div>
+
+      <div class="right-side">
+        <mat-form-field appearance="fill">
+          <mat-label>Account No</mat-label>
+          <input matInput placeholder="Enter" formControlName="account_no"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>IFSC Code</mat-label>  
+          <input matInput placeholder="Enter IFSC code" formControlName="ifsc_code" (input)="toUpperCase($event)"/>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+{{bankAccounts|json}}

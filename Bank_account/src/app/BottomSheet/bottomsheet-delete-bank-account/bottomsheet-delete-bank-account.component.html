@@ -1,0 +1,28 @@
+<div class="main">
+  <div style="display: flex;" class="header">
+    <h3>Submit ePIN</h3>
+  </div>
+  <form (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-content">
+      <label for="ePIN">ePIN</label>
+      <input
+        type="text"
+        id="ePIN"
+        [(ngModel)]="ePIN"
+        name="ePIN"
+        required
+      />
+      <p>ePIN will be shown in the eVitalRx Mobile App's Menu.</p>
+    </div>
+
+    <div class="button-container">
+      <button
+        type="submit"
+        (click)="inactiveBankAccount()"
+        class="delete-btn"
+        [disabled]="!ePIN"   >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

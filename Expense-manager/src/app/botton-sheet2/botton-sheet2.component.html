@@ -1,0 +1,21 @@
+<div class="main">
+  <form [formGroup]="paymentMethodForm" (ngSubmit)="selectPaymentMethod()">
+    <h2 class="bottom-sheet-header">Select Payment Method</h2>
+  
+    <mat-form-field>
+      <mat-label>Payment Method</mat-label>
+      <mat-select formControlName="payment_method_id">
+        <mat-option *ngFor="let method of paymentMethods" [value]="method.id">
+          {{ method.method_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    
+    <div class="button-group">
+    <button class="reset" type="button" style="margin-left: 10px;" (click)="resetForm()">Reset</button>
+    <button class="apply" type="submit" [disabled]="!paymentMethodForm.valid">Apply</button>
+  </div>
+    
+  </form>
+</div>

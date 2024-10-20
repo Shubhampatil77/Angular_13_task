@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+.main{
+
+    box-sizing: border-box;
+}
+html, body { 
+
+    height: 100%; 
+}
+body {
+    
+     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+    }
+
+.custom-width {
+    min-width: 812px;
+    max-width: calc(100vw - 256px);
+    }
+
+    .custom-css{
+        max-width: 555px;
+        height: 450px;
+      }
+   
+    
+  .toast-error {
+    background-color: #dc3545; 
+    color: white; 
+  }
+  
+  .toast-warning {
+    background-color: #f9c50a; 
+    color: rgb(243, 244, 237); 
+    margin-bottom: 50px;
+  }
+  
+
+
+
+  .center {
+    text-align: center;
+  }
+  
+  .toast-success {
+    padding-left: 80px;
+    text-align: center;
+    background-position: 35% !important;
+  }

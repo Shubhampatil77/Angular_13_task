@@ -1,0 +1,716 @@
+<router-outlet></router-outlet>
+<!-- <app-bank-account></app-bank-account> -->
+
+
+
+<mat-toolbar class="mat-elevation-z8">
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav opened>
+    Hello
+  </mat-sidenav>
+  <mat-sidenav-content>
+    Hello
+      
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+
+<mat-divider></mat-divider>
+ <!-- ToolBar -->
+  
+ <mat-toolbar class="header" color="primary">  
+  <div>Navbar</div>
+  <div>
+    <span>Home</span>
+    <span>About</span>
+    <span>Services </span>
+  </div>
+</mat-toolbar>
+
+<!-- menu -->
+<h1>Menu</h1>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item [mat-menu-trigger-for]="submenu">Frontend</button>
+  <button mat-menu-item>Backend</button>
+</mat-menu>
+
+<!-- SubMenu   -->
+<mat-menu #submenu="matMenu">
+  <button mat-menu-item>Angualar</button>
+  <button mat-menu-item>React</button>
+  <button mat-menu-item>Vue</button>
+</mat-menu>
+<button mat-raised-button [matMenuTriggerFor]="menu">Menu</button>
+
+
+<mat-menu #appMenu="matMenu">
+  <ng-template matMenuContent>
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item>Help</button>
+  </ng-template>
+</mat-menu>
+
+
+<button mat-icon-button [matMenuTriggerFor]="appMenu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+
+
+
+<div>
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
+
+<!-- Buttons -->
+<div>
+<button mat-button>Angular Material Button</button>
+<button mat-flat-button>flat Button</button>
+<button mat-raised-button>raised Button</button>
+<button mat-stroked-button>stroked Button</button>
+</div>
+
+<section>
+    <div class="example-label">Basic</div>
+    <div class="example-button-row">
+      <button color="primary" disableRipple mat-button>Basic</button>
+      <button mat-button disabled>Disabled</button>
+      <a mat-button href="" target="_blank">Link</a>
+    </div>
+  </section>
+  <mat-divider></mat-divider>
+  <section>
+    <div class="example-label">Raised</div>
+    <div class="example-button-row">
+      <button color="accent" mat-raised-button>Basic</button>
+      <button color="primary" mat-raised-button disabled>Disabled</button>
+      <a mat-raised-button href="" target="_blank">Link</a>
+    </div>
+  </section>
+  <mat-divider></mat-divider>
+  <section>
+    <div class="example-label">Stroked</div>
+    <div class="example-button-row">
+      <button color="warn" mat-stroked-button>Basic</button>
+      <button mat-stroked-button disabled>Disabled</button>
+      <a mat-stroked-button href="" target="_blank">Link</a>
+    </div>
+  </section>
+  <mat-divider></mat-divider>
+  <section>
+    <div class="example-label">Flat</div>
+    <div class="example-button-row">
+      <button mat-flat-button>Basic</button>
+      <button mat-flat-button disabled>Disabled</button>
+      <a mat-flat-button href="" target="_blank">Link</a>
+    </div>
+  </section>
+
+  
+
+  <!-- mat-button-toggle-group -->
+
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #toggleGroup="matButtonToggleGroup" multiple>
+    <button mat-raised-button>mat-button-toggle-group
+    </button>
+    <mat-button-toggle #toggleBtn value="bold">Bold</mat-button-toggle>
+    <mat-button-toggle value="italic">Italic</mat-button-toggle>
+    <mat-button-toggle value="underline">Underline</mat-button-toggle>
+    {{toggleGroup.value}}
+  </mat-button-toggle-group>
+
+  <!-- Icon -->
+<div>
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+</div>
+
+<!-- matBadge -->
+
+<div>
+</div>
+  <!-- Loader -->
+  <div class="demo-section">
+    <button mat-raised-button matBadge="8" [matBadge]="notification" matBadgePosition="above after">
+      Action 
+    </button>
+  </div>
+  
+  <div class="demo-section">
+      Button toggles badge visibility
+      <button mat-raised-button matBadge="7" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">
+          Hide
+      </button>
+    </div>
+  
+  <div class="demo-section">
+    <mat-icon matBadge="15">home</mat-icon>
+    <mat-icon matBadge="15">folder</mat-icon>
+
+      <!-- Include text description of the icon's meaning for screen-readers -->
+      <span class="cdk-visually-hidden">
+        Example with a home icon with overlaid badge showing the number 15
+      </span>
+  </div>
+<mat-divider></mat-divider>
+  
+<!-- Progress Spinner Bar -->
+  <div>
+    <mat-spinner *ngIf="showSpinner" color="warn"></mat-spinner>
+    <button mat-raised-button (click)="loadData()">Load Data</button>
+</div>
+
+<!-- Progress Bar -->
+<div>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+</div>
+<!-- sideNav -->
+<mat-sidenav-container>
+  <!-- "push"  -->
+   <!-- "side" -->
+   <!-- over -->
+  <mat-sidenav mode="side" [(opened)]="opened">Start</mat-sidenav>
+  <mat-sidenav-content>Main
+    <button mat-raised-button (click)="opened = !opened">Toggle value</button>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<!-- List -->
+
+<mat-list dense>
+  <mat-list-item>Item 1</mat-list-item>
+  <mat-list-item>Item 2</mat-list-item>
+  <mat-list-item>Item 3</mat-list-item>
+</mat-list>
+
+<!-- list with link -->
+<!-- <mat-nav-list>
+  <a mat-list-item href="#">home</a>
+  <a mat-list-item href="#">About</a>
+  <a mat-list-item href="#">Services</a>
+</mat-nav-list> -->
+<mat-divider></mat-divider>
+
+<!-- Grid List -->
+<mat-grid-list cols="4" rowHeight="2:2" gutterSize="5px">
+  <mat-grid-tile rowspan="3">1</mat-grid-tile>
+  <mat-grid-tile colspan="2">2</mat-grid-tile>  
+  <mat-grid-tile rowspan="3">3</mat-grid-tile>
+  <mat-grid-tile>4</mat-grid-tile>
+  <mat-grid-tile>5</mat-grid-tile>
+  <mat-grid-tile colspan="2">6</mat-grid-tile>
+</mat-grid-list>
+
+<!-- Mat Exepnsaion Pannel -->
+
+<!-- <mat-expansion-panel hideToggle> -->
+
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      <mat-panel-title> This is the expansion title 1</mat-panel-title>
+      <mat-panel-description> This is a description  1</mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>This is the primary content of the panel.</p>
+    <mat-action-row>
+      <button mat-button>Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+
+  <!-- <mat-accordion> -->
+
+  <mat-accordion>
+<mat-expansion-panel >
+  <mat-expansion-panel-header>
+    <mat-panel-title> This is the expansion title  2</mat-panel-title>
+    <mat-panel-description> This is a description  2  </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>This is the primary content of the panel.</p>
+  <mat-action-row>
+    <button mat-button>Next</button>
+  </mat-action-row>
+</mat-expansion-panel>
+
+
+<mat-expansion-panel >
+  <mat-expansion-panel-header>
+    <mat-panel-title> This is the expansion title  3</mat-panel-title>
+    <mat-panel-description> This is a description  3</mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>This is the primary content of the panel.</p>
+  <mat-action-row>
+    <button mat-button>Next</button>
+  </mat-action-row>
+</mat-expansion-panel>
+</mat-accordion>
+
+<!-- Card -->
+
+<mat-card class="example-card">
+  <mat-card-header>
+
+    <!-- <div mat-card-avatar class="example-header-image"></div> -->
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
+
+
+<!-- tabs -->
+
+
+<mat-tab-group  #tabRef animationDuration="2000ms" mat-align-tabs="start">
+
+<mat-tab label="Angular">Angular</mat-tab>
+<mat-tab label="React">React</mat-tab>
+<mat-tab label="Vue">Vue</mat-tab>
+
+</mat-tab-group>
+{{tabRef.selectedIndex}}
+
+<mat-divider></mat-divider>
+
+
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+  <mat-tab label="First">Content 1</mat-tab>
+  <mat-tab label="Second">Content 2</mat-tab>
+  <mat-tab label="Third">Content 3</mat-tab>
+</mat-tab-group>
+
+<mat-tab-group mat-stretch-tabs=" false" mat-align-tabs="center">
+  <mat-tab label="First">Content 1</mat-tab>
+  <mat-tab label="Second">Content 2</mat-tab>
+  <mat-tab label="Third">Content 3</mat-tab>
+</mat-tab-group>
+
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="end">
+  <mat-tab label="First">Content 1</mat-tab>
+  <mat-tab label="Second">Content 2</mat-tab>
+  <mat-tab label="Third">Content 3</mat-tab>
+</mat-tab-group>
+
+<mat-divider></mat-divider>
+
+
+<!-- stepper -->
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>
+<mat-stepper [linear]="isLinear" #stepper>
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+
+</mat-stepper>
+
+
+<!-- Input  -->
+
+
+  
+  <mat-form-field class="example-full-width" floatLabel="always" appearance="outline">
+    <mat-label>Favorite food</mat-label>
+    <!-- <input matInput placeholder="Ex.Enter Name"> -->
+    <input matInput >
+  
+  </mat-form-field>
+
+  
+  <mat-form-field class="example-full-width" floatLabelType="never" hideRequiredMarker appearance="fill" color="warn">
+    <mat-label>Favorite food</mat-label>
+    <input matInput placeholder="Ex.Enter Name" required>
+    <mat-hint align="end" >Min 5 characters </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+  </mat-form-field>
+
+
+  <!-- select -->
+  <h4>Basic mat-select</h4>
+  <mat-form-field>
+    <mat-label>Favorite food</mat-label>
+    <mat-select>
+      <div *ngFor="let food of foods; track food" >
+        <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+    </div>
+
+    </mat-select>
+  </mat-form-field>
+<mat-divider></mat-divider>
+  
+  <h4>Basic native select</h4>
+  <mat-form-field>
+    <mat-label>Cars</mat-label>
+    <select matNativeControl required>
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+  </mat-form-field>
+
+<mat-divider></mat-divider>
+  <mat-form-field>
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="selected" multiple >
+      <mat-option>None</mat-option>
+      <mat-option value="option1">Option 1</mat-option>
+      <mat-option value="option2" disabled>Option 2</mat-option>
+      <mat-option value="option3">Option 3</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <p>You selected: {{selected}}</p>
+
+  
+  <mat-divider></mat-divider>
+
+
+  <h4>mat-select</h4>
+<mat-form-field>
+  <mat-label>Pokemon</mat-label>
+  <mat-select [formControl]="pokemonControl">
+    <mat-option>-- None --</mat-option>
+    <div *ngFor="let group of pokemonGroups " >
+      <mat-optgroup [label]="group.name"
+                    [disabled]="group.disabled">
+    <div *ngFor="let pokemon of group.pokemon;track pokemon "  >
+          <mat-option [value]="pokemon.value">{{pokemon.viewValue}}</mat-option>
+    </div>
+        
+      </mat-optgroup>
+    </div>
+  </mat-select>
+</mat-form-field>
+
+<mat-divider></mat-divider>
+
+<!-- Autocomplete -->
+
+
+<!-- 
+<div class="div">
+  <form>
+    <mat-form-field>
+      <input type="text" matInput [matAutocomplete]="auto"/>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let opetion of opetions" [value]="opetion">
+            {{opetion}}
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-form-field>
+
+  </form>
+</div> -->
+<!-- 
+<div class="div">
+  <form>
+    <mat-form-field>
+      <input type="text" matInput [matAutocomplete]="auto" />
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFu">
+        <mat-option *ngFor="let opetions of objectOptions" [value]="opetions">
+            {{opetions.name }}
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-form-field>
+
+  </form>
+</div> -->
+
+<mat-divider></mat-divider>
+
+
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Number</mat-label>
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Number"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+<mat-divider></mat-divider>
+
+
+<!-- Check Boc=x and Radio Button  -->
+
+<div class="div">
+<mat-checkbox color="primary">
+  CheckBox 0
+</mat-checkbox>
+<br>
+<mat-checkbox labelPosition="before">
+  CheckBox 1
+</mat-checkbox>
+<br>
+<mat-checkbox class="example-margin" [disabled]="true">Disabled</mat-checkbox>
+</div>
+
+<!-- RadioButtton  -->
+
+<mat-radio-group>
+<mat-radio-button color="primary">  Angualar </mat-radio-button>
+<mat-radio-button color="accent"> React </mat-radio-button>
+<mat-radio-button color="warn"> Vue </mat-radio-button>
+</mat-radio-group>
+<mat-divider></mat-divider>
+
+
+<!-- Datepikkkar -->
+
+<p>
+  <mat-form-field>
+    <mat-label>Completely disabled</mat-label>
+    <input matInput [matDatepicker]="dp1" disabled>
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+    <mat-datepicker #dp1></mat-datepicker>
+  </mat-form-field>
+</p>
+
+<p>
+  <mat-form-field>
+    <mat-label>Popup disabled</mat-label>
+    <input matInput [matDatepicker]="dp2">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="dp2" disabled></mat-datepicker-toggle>
+    <mat-datepicker #dp2></mat-datepicker>
+  </mat-form-field>
+</p>
+
+<p>
+  <mat-form-field>
+    <mat-label>Input disabled</mat-label>
+    <input matInput [matDatepicker]="dp3" disabled>
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+  </mat-form-field>
+</p>
+
+<mat-divider></mat-divider>
+<mat-form-field class="example-full-width">
+  <mat-label>Choose a date</mat-label>
+  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker2">
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
+<mat-divider></mat-divider>
+<!-- tooltip -->
+
+<button mat-raised-button
+        matTooltip="Info about the action"
+        aria-label="Button that displays a tooltip when focused or hovered over">
+  Action
+</button>
+<mat-divider></mat-divider>
+
+<!-- snakbar -->
+
+
+<mat-form-field>
+  <mat-label>Message</mat-label>
+  <input matInput value="Disco party!" #message>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Action</mat-label>
+  <input matInput value="Dance" #action>
+</mat-form-field>
+
+<button mat-stroked-button (click)="openSnackBar(message.value, action.value)">Show snack-bar</button>
+
+
+<mat-divider></mat-divider>
+<!-- Dailog  -->
+<button mat-raised-button (click)="openDialog1()">Open Dialog </button>
+<mat-divider></mat-divider>
+
+
+<!-- table   -->
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 demo-table">
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+    <td mat-cell *matCellDef="let element">{{element.position}}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef>Weight</th>
+    <td mat-cell *matCellDef="let element">{{element.weight}}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef>Symbol</th>
+    <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+      mat-row
+      (click)="clickedRows.add(row)"
+      [class.demo-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns;"
+  ></tr>
+</table>
+
+
+<div>
+  <h3>
+    Click Log
+  </h3>
+</div>
+
+<div *ngIf="!clickedRows.size">
+  Clicked rows will be logged here
+</div>
+
+<ul>
+  <li *ngFor="let clickedRow of clickedRows">
+    {{clickedRow.position}}Clicked on {{clickedRow.name}}
+  </li>
+</ul>
+
+<mat-divider></mat-divider>
+
+<!-- Slide Toggale  -->
+
+<mat-slide-toggle> Side Me</mat-slide-toggle>
+
+<mat-divider></mat-divider>
+
+
+
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Company (disabled)</mat-label>
+    <input matInput disabled value="Google">
+  </mat-form-field>
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>First name</mat-label>
+      <input matInput>
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>Long Last Name That Will Be Truncated</mat-label>
+      <input matInput>
+    </mat-form-field></td>
+  </tr></table>
+
+  <p>
+    <mat-form-field class="example-full-width">
+      <mat-label>Address</mat-label>
+      <textarea matInput placeholder="Ex. 100 Main St">1600 Amphitheatre Pkwy</textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Address 2</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+  </p>
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>City</mat-label>
+      <input matInput placeholder="Ex. San Francisco">
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>State</mat-label>
+      <input matInput placeholder="Ex. California">
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>Postal Code</mat-label>
+      <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" value="94043">
+      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+    </mat-form-field></td>
+  </tr></table>
+</form>
+
+
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Telephone</mat-label>
+    <span matPrefix>+1 &nbsp;</span>
+    <input type="tel" matInput placeholder="555-555-1234">
+    <mat-icon matSuffix>delete</mat-icon>
+    <mat-icon matSuffix>home</mat-icon>
+    <mat-icon matSuffix>thumb_up</mat-icon>
+    <mat-icon matSuffix>files</mat-icon>
+  </mat-form-field>
+</form>

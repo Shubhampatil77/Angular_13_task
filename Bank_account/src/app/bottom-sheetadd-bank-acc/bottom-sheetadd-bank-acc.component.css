@@ -1,0 +1,34 @@
+.main {
+  padding: 20px; 
+}
+
+.header {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 20px; 
+}
+
+.add-bank-account-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-side,
+.right-side {
+  flex: 1;
+  margin-right: 10px; 
+}
+
+.left-side {
+  margin-right: 20px; 
+}
+
+mat-form-field {
+  width: 100%; 
+  margin-bottom: 15px; 
+}
+
+.add-button-container {
+  margin-bottom: 20px; 
+}

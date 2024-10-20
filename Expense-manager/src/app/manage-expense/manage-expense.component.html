@@ -1,0 +1,148 @@
+    <div class="main">
+      <div class="header">
+        <header>
+          <button class="btn">eOrders</button>
+          <button class="btn">Sales</button>
+          <button class="btn">Purchase</button>
+          <button class="btn">Inventory</button>
+          <button class="btn">MedGuide</button>
+          <button class="btn">Sahaai</button>
+          <button class="btn">More</button>
+          <button class="btnl">{{ pharmacyName }}</button>
+         <!--   <button class="btnl">{{ city }}</button>  -->
+         <button class="btn1" (click)="logout()">Logout</button>
+         
+                   
+        </header>
+      </div>
+      <div class="expense-header-header">
+
+        <div class="left">
+          <div class="title">Manage Income & Expense</div>
+        </div>
+        <div class="right">
+          <div class="income-btn">
+            <button>Income/Deposit</button>
+          </div>
+          <div class="expense-btn">
+            <button mat-raised-button (click)="openBottomSheet()">Expense/Withdraw</button>
+          </div>
+        </div>
+      </div>
+      <div class="mian-table-main">
+        <div class="main-table">
+          <form [formGroup]="addExpenseForm">
+          <div class="filter-main">
+            <div class="filter">
+              <div class="custom-select-container">
+                <input class="custom-select" type="text"  formControlName="expense_date"
+                ngxDaterangepickerMd
+                [(ngModel)]="selected" 
+                [showCustomRangeLabel]="true"
+                [alwaysShowCalendars]="false"
+                [ranges]="ranges"
+                [linkedCalendars]="true"
+                [isInvalidDate]="isInvalidDate"
+                (datesUpdated)="onDateRangeSelected($event)"
+                placeholder="Select Date"
+              />
+              </div>
+                <div class="custom-select-container-all">
+                  <mat-select  formControlName="category_id" (selectionChange)="fetchExpenses()" class="custom-select">
+                    <mat-option value="All">All</mat-option>
+                    <mat-option *ngFor="let option of radioOptions" [value]="option.id">{{ option.label }}</mat-option>
+                  </mat-select>
+                  </div>
+
+              <div class="custom-select-container-al">
+                <p (click)="openBottomSheet2()">More Filters</p>
+                
+                
+              </div>
+            </div>
+            <div class="calculation">
+              <div class="custom-select-container">
+                <span>Total Expense
+                   <p><strong>{{ total | currency: 'INR':'symbol' }}</strong></p></span>
+      
+                </div>
+              <div class="custom-select-container">
+              <span> Total Income
+                   <p><strong>{{ total_income |currency:'INR'}}</strong></p></span>
+      
+                </div>
+              <div class="custom-select-container" >
+                <span> Total
+                   <p><strong style="color: red;">{{ total_amount | currency: 'INR':'symbol' }}</strong></p></span>     
+                </div>
+            </div>
+          </div>
+        </form>
+
+
+          <div class="table-div">
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <!-- Entry Date -->
+                    <button mat-button class="header-button"  (click)="sort('expense_date')"> 
+                      Entry Date
+                      <i class='fas fa-sort-numeric-down'></i>
+
+                    </button>
+                  </th>
+
+                  <th>Category</th>
+                  <th>Transaction Type</th>
+                  <th>Entry By</th>
+                  <th>Payment Mode</th>
+                  <th><button mat-button class="header-button" (click)="sort('reference_no')"> 
+                    Ref.No
+                    <i class='fas fa-sort-numeric-down'></i>
+                    
+                  </button>
+                
+                </th>
+                  <th style="text-align: right;padding-right: unset;">
+                    <!-- Amount -->
+                    <button mat-button class="header-button" (click)="sort('amount')"> 
+                      Amount
+                      <i class='fas fa-sort-numeric-down'></i>
+
+                    </button>         
+                  </th>
+                  <th style="text-align: right;">GST (%)</th>
+                  <th style="text-align: right;"><button mat-button class="header-button" (click)="sort('total')"> 
+                    Total  
+                    <i class='fas fa-sort-numeric-down'></i>
+
+                  </button></th>
+                  <th>Remark</th>
+                  <!-- <th>Delete</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let expense of expenses">
+                  <td>{{ expense.expense_date | dateFormat }}</td>
+                  <td>{{ getCategoryName(expense.category_id) }}</td>
+                  <td>{{ expense.transaction_type }}</td>
+                  <td>{{ expense.expense_by_name }}</td>
+                  <td>{{ getPaymentMethodName(expense.payment_status) }}</td>
+                  <td>{{ expense.reference_no }}</td>
+                  <!-- Aligning the Amount, GST, and Total to the right -->
+                  <td style="text-align: right;color: blue;">₹{{ expense.amount | number: '1.2-2' }}</td>
+                  <td style="text-align: right;">{{ expense.gst }}</td>
+                  <td style="text-align: right;color: blue;">₹{{ expense.total | number: '1.2-2' }}</td>
+                  <td>{{ expense.description }}</td>
+                  <!-- <td><button class="danger" (click)="deleteExpense(expense.id)">Delete</button></td> -->
+                  <i class="fa fa-trash" aria-hidden="true" (click)="deleteExpense(expense.id)"></i>
+
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,222 @@
+.html, body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+
+  }
+
+.main{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+
+.btn{
+    margin-left: 50px;
+    background-color: blue;
+    color: white;
+    border: 0cap;
+    font-size: large;
+    
+}
+.btnl{
+    border-radius: 8px; 
+    margin: 10px;
+    margin-left: 300px;
+    background-color: blue;
+    color: white;
+    border: 0cap;
+    font-size: large;
+    cursor: pointer;
+
+}
+.header{
+
+    height: 50px;
+    background-color: blue;
+}
+
+.expense-header-header{
+    height: 70px;
+    background-color: rgb(187, 221, 232);
+    display: flex;               
+    justify-content: space-between; 
+    align-items: center;         
+    background-color: rgb(233, 235, 218); 
+    height: 60px;
+    width: 100%;
+}
+.left{
+    margin-left: 0;
+}
+.title{
+    padding: 20px;
+    color: rgb(12, 20, 232);
+    font-size: 1.3rem;
+}
+.right .expense-btn button {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: medium;
+  font-weight: bold;
+
+}
+.right .income-btn button{
+    background-color: rgb(33, 162, 218);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: bold;
+  }
+
+
+.right {
+  display: flex;
+  gap: 10px; 
+  margin-right: 25px;
+}
+
+/* tbale main */
+.mian-table-main{
+    background-color: rgb(233, 235, 218); 
+}
+.main-table{
+    padding: 20px;
+    background-color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* filters */
+.filter-main {
+    display: flex;
+    justify-content: space-between; /* Push the two groups to opposite sides */
+    align-items: center; /* Vertically center both groups */
+    padding: px;
+}
+
+.filter {
+    display: flex;
+    gap: 20px; /* Space between each filter item */
+}
+
+
+
+.date, .all, .more-filter, .total-expense, .total-income, .total {
+    padding-top: 20px;
+    padding-right: 15px;
+    color: blue;
+    /* background-color: lightgray; You can style these further */
+    /* border-radius: 5px; */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* margin-top: 50px; */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    /* background-color: #2104fe; */
+    color: blue;
+    font-weight: 450;
+}
+
+
+tbody tr:hover {
+    background-color: #39d2e3;
+    color: white;
+
+}
+
+.danger{
+    background-color: rgb(16, 126, 236);
+    color: white;
+    border: #f3f5f8 solid 1px;
+    height: 26px;
+    width: 58px;
+    cursor: pointer;
+
+}
+.danger:hover{
+    background-color: #f31e0b;
+    color: white;
+}
+
+    .custom-select-container {
+        text-align: right;
+        color: #135ba3;
+        display: inline-block;
+        position: relative;
+        height: 40px;
+        width: 165px; 
+        /* height: 30px;
+        border: 1px solid black; */
+      }
+      .custom-select-container-all{
+        text-align: left;
+        color: #135ba3;
+        /* background-color: red; */
+        display: inline-block;
+        position: relative;
+        height: 19px;
+        width: 270px;
+        border: 1px solid black;      }
+
+    .custom-select-container-al{
+        color: blue;
+       margin-top: -16px;
+       cursor: pointer;
+
+                    
+        }
+ .btn1 {
+    background-color: #ec0606;
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 15px; /* Top and bottom padding, left and right padding */    
+    border-radius: 4px; /* Rounded corners */
+    margin-left: 90px;
+    cursor: pointer;
+
+          }
+.calculation {
+ text-align: right;
+  }
+
+  .header-button{
+    color: blue;
+    background-color: white;
+    border: 0px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: -8px;
+    cursor: pointer;
+
+  }
+
+
+ /* .fa-solid {
+    font-size: 16px !important;
+    color: rgba(4, 76, 157, 0.5) !important;
+    position: unset;
+    cursor: pointer;
+  } */
+   

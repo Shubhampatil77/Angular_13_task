@@ -1,0 +1,5 @@
+.mat-raised-button { background-color: blue  ; }
+.button-group { margin-left: 250px; /* margin-top: 111px; */ }
+.reset { background-color: rgb(16, 126, 236); color: white; border: #f3f5f8 solid 1px; height: 34px; width: 83px; cursor: pointer; }
+.reset:hover { background-color: #07c416; color: white; cursor: pointer; }
+.apply { border: #f3f5f8 solid 1px; height: 34px; width: 83px; cursor: pointer; }

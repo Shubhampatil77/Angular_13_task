@@ -1,0 +1,177 @@
+<div class="container">
+<div class="bottom model">
+  <div class="head">
+      <div class="addexpense">
+        <div class="title">
+          Add Expense
+        </div>
+      </div>
+      <div class="submit-tbn">
+        <button mat-raised-button class="btn" (click)="addExpense()">Submit</button>
+
+        <button mat-icon-button (click)="closeBottomSheet()" class="close-button">Cancel</button>
+        
+      </div>  
+
+  </div>
+  <div class="form-in">
+    <form [formGroup]="addExpenseForm">
+      <div class="catergory-left">
+              <div class="radio-buttons">
+                <h3>Category</h3>
+                <mat-radio-group formControlName="category_id">
+                  <div class="radio-item" *ngFor="let option of radioOptions">
+                    <mat-radio-button [value]="option.id">
+                      {{ option.label }}
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>          
+      </div>
+      </form>
+      <!-- <div class="check">
+        check
+      </div> -->
+    <form [formGroup]="addExpenseForm">
+
+      <div class="details-right">
+            <div class="date">
+              <div class="left-date">
+                    <mat-form-field appearance="fill">
+                      <label>Expense Date</label>
+                      <input matInput [matDatepicker]="picker" formControlName="expense_date">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-error *ngIf="addExpenseForm.get('expense_date')?.hasError('required')">
+                      Expense Date is required.
+                    </mat-error>
+                    
+               </div>
+                  <div class="right-date">
+                    <mat-form-field appearance="fill">
+                      <label>Payment Date</label>
+                      <input matInput [matDatepicker]="picker2" formControlName="payment_date">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                    <mat-error *ngIf="addExpenseForm.get('payment_date')?.hasError('required')">
+                      Payment Date is required.
+                    </mat-error>     
+                      </div>
+            </div> 
+            <div class="gst-detils">
+              <div>
+                <mat-radio-group formControlName="gstOption" (change)="onGSTOptionChange($event.value)">
+                  <mat-radio-button class="radio" value="withGST">With GST</mat-radio-button>
+
+                  <mat-radio-button class="radio" value="withoutGST">Without GST</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              
+              <div class="form-group" *ngIf="addExpenseForm.get('gstOption')?.value === 'withGST'">
+                <!-- Show these fields when 'With GST' is selected -->
+                <mat-form-field>
+                  <label>GST %</label>
+                  <input matInput type="number" formControlName="gstPercent" placeholder="eg. 0,5,12,18,28">
+                  <mat-error *ngIf="addExpenseForm.get('gstPercent')?.hasError('gstPercentValidator')">
+                    Invalid GST percentage. Allowed values are 0, 5, 12, 18, 28.
+                  </mat-error>
+                </mat-form-field>
+              
+                <mat-form-field>
+                  <label>GSTN Number</label>
+                  <input matInput type="text" formControlName="gstnNumber" placeholder="eg.22AAAAA0000A1Z5">
+                  <mat-error *ngIf="addExpenseForm.get('gstnNumber')?.hasError('gstnNumberValidator')">
+                    Invalid GSTN number.
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <label>Party Name</label>
+                  <input matInput type="text" formControlName="partyName">
+                  <mat-error *ngIf="addExpenseForm.get('partyName')?.hasError('textOnlyValidator')">
+                    Invalid GSTN number.
+                </mat-error>
+                </mat-form-field>
+                
+              </div>
+            </div>
+
+
+            <div class="amount">
+              <div class="ex-gst">
+                <mat-form-field>
+                  <label>Amount(Excluding GST)</label>
+                  <input matInput formControlName="amount" type="text" placeholder="eg. 100, 200">
+                  <mat-error *ngIf="addExpenseForm.get('amount')?.hasError('required') && submitted">
+                    Amount is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="total">
+                <mat-form-field>
+                  <label>Total</label>
+                  <input matInput formControlName="totalamount" type="text" readonly placeholder="{{calculateTotal()}}">
+                </mat-form-field>
+              </div>
+            </div>
+            
+          <div class="form-group">
+
+            <div class="payment-mode">
+              <mat-form-field>
+                <mat-label>Payment Mode</mat-label>
+                <mat-select formControlName="payment_method_id" (selectionChange)="onPaymentModeChange($event)">
+                  <mat-option *ngFor="let mode of paymentModes" [value]="mode.id">
+                    {{ mode.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            
+            
+            <div class="Reference-no">
+              <mat-form-field>
+                <label>Reference No.</label>
+                <input matInput type="text" formControlName="reference_no">
+              </mat-form-field>
+            </div>
+
+            <div class="remark">
+              <mat-form-field>
+
+              <label>Remark</label>
+              <input matInput type="text" formControlName="remark">
+              </mat-form-field>
+
+              
+            </div>            
+            
+          </div>
+              <div class="form-group">
+                <mat-form-field *ngIf="showChequeAndBankFields">
+                  <label>Bank Account</label>
+                  <input matInput formControlName="bankaccount">
+                </mat-form-field>
+              <mat-form-field *ngIf="showChequeAndBankFields">
+                <label>Cheque Date</label>
+                <input matInput formControlName="cheque_date" [matDatepicker]="picker3" (click)="picker3.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>          
+                </div>
+
+          <div class="upload-invoice">
+              <label> Upload Invoice</label>
+              <div class="upload">
+                <input class="up" type="file" (change)="onFileSelected($event)">
+                <i _ngcontent-avw-c473="" class="fas fa-plus"></i>
+              </div>
+
+          </div>
+        
+      </div>
+      </form>
+  </div>
+  </div>
+</div>

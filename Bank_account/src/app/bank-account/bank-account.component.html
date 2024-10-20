@@ -1,0 +1,268 @@
+<div class="main">
+
+
+<div class="header">
+    <header>
+      <button class="btn">eOrders</button>
+      <button class="btn">Sales</button>
+      <button class="btn">Purchase</button>
+      <button class="btn">Inventory</button>
+      <button class="btn">MedGuide</button>
+      <button class="btn">Sahaai</button>
+      <button class="btn">More</button>
+     <!--   <button class="btnl">{{ city }}</button>  -->          
+    </header>
+  </div>
+<div style="display: flex; justify-content: flex-end; margin-top: 5px;">
+  <button class="addentry"
+    (click)="openBottomSheet()">
+    Add Entry
+  </button>
+</div>
+
+<div class="bank-account-container">
+    <!-- Left Side: Bank Account Information -->
+    <div class="left-side">
+      <h4 style="padding-left: 20px;">Bank Accounts</h4>
+      <div class="bank-info">
+        <div *ngIf="bankDetails.length === 0">
+          <p>No bank accounts available.</p>
+        </div>
+        <div *ngFor="let account of bankDetails" class="repet-class" 
+        [ngClass]="{'selected': selectedAccountId && selectedAccountId == account.id}">
+        <!-- <p>Account ID: {{ account.id }}, Selected ID: {{ selectedAccountId }}</p> -->
+
+          <div (click)="fetchPassbookDetails(account.id)" style="cursor: pointer;">
+            <p style="background-color: #958989; margin-left:95px; margin-bottom: -19px; padding-left: 10px;" *ngIf="account.status === 'inactive' || account.is_primary === 'yes'">
+              {{ account.status === 'inactive' ? 'Deactive' : 'Primary' }}
+            </p>
+            <p style="color: rgb(163, 172, 172);">{{ account.account_number }}</p>
+            <p>{{ account.bank_name }}</p>
+            <div class="next" style="display: flex;">
+           
+          </div>
+          </div>
+        </div>
+      </div>
+      
+
+      
+      <!-- {{bankDetails| json}} -->
+      
+        <a class="manage-btn" (click)="openBottomSheetBankAccount()">Manage Accounts</a>
+    </div>
+    <!-- {{account| json}} -->
+  
+    <!-- Right Side: Passbook and Payment Details -->
+    <div class="right-side">
+        <div class="tab-container">
+           <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+
+        <mat-tab class="left-header" label="Passbook">
+          <!-- <form [formGroup]="addbankForm"> -->
+
+            <ng-template matTabContent>
+              <div>
+                <div class="filter-section">
+                  <div>
+                    <!-- <input
+                        type="text"
+                        placeholder="Search by description"
+                        [(ngModel)]="searchDescription"
+                        (input)="onSearch()"
+                    />-->
+                    <div class="serch">
+                        <select id="staff-select">
+                          <option value="1">Cheeqe/Ref.No </option>
+                          <option value="2">Notes</option>
+                        </select>
+                    <input 
+                        type="text"
+                        placeholder="Type Here "
+                        [(ngModel)]="searchRemarks"
+                        (input)="onSearch()"
+                    />
+                    
+                    <button (click)="fetchPassbookDetails(selectedAccountId, startDate, endDate, searchRemarks)" hidden></button>
+                  </div>
+                </div>
+                <form [formGroup]="addExpenseForm">
+
+                <div class="custom-select-container">
+                  <input class="custom-select" type="text" 
+                      formControlName="expense_date"
+                      ngxDaterangepickerMd
+                      [(ngModel)]="selected" 
+                      [showCustomRangeLabel]="true"
+                      [alwaysShowCalendars]="false"
+                      [ranges]="ranges"
+                      [linkedCalendars]="true"
+                      [isInvalidDate]="isInvalidDate"
+                      (datesUpdated)="onDateRangeSelected($event)"
+                      placeholder="{{ selected.startDate.format('DD-MM-YYYY') }} - {{ selected.endDate.format('DD-MM-YYYY') }}"
+                         />
+              </div>
+              </form>
+              
+                  <label for="staff-select">Select Staff:</label>
+          
+                  <select id="staff-select">
+                    <option value="1">All</option>
+                    <option value="2">Owner</option>
+                  </select>
+                  <!-- <button class="download-btn">Download</button> -->
+                </div>
+                <div class="transaction-container">
+                  <div class="transaction-header">
+                    <div class="transaction-row">
+                    <!-- <div *ngFor="let transaction of passbookDetails" class="transaction-row"> -->
+
+                      <div class="transaction-cell" (click)="sortByClearanceDate()">Date
+                      <i class='fas fa-sort-numeric-down' style=" cursor: pointer;"></i>
+
+                      </div>
+                      <div class="transaction-cell">Party Name</div>
+                      <div class="transaction-cell">Entry By</div>
+                      <div class="transaction-cell"><p>Deposits</p> <p>{{total_credit | currency: 'INR':'symbol':'1.2-2'}}</p></div>
+                      <div class="transaction-cell"><p>Withdrawals</p>  <p>{{total_debit | currency: 'INR':'symbol':'1.2-2'}}</p></div>
+                      <div class="transaction-cell"> <p>Balance</p>   <p>{{current_bal| currency: 'INR':'symbol':'1.2-2'}}</p></div>
+                      <div class="transaction-cell">Mode</div>
+                      <div class="transaction-cell">Cheque/Ref. No.</div>
+                      <div class="transaction-cell"></div>
+                      <div class="transaction-cell"></div>
+                      <div class="transaction-cell"></div>
+                      <!-- {{}} -->
+                  <!-- </div> -->
+
+                    </div>
+                  </div>
+                  <div class="transaction-body">
+                    <!-- Repeat this for each transaction row -->
+                    <div *ngFor="let transaction of passbookDetails; let i = index"  class="transaction-row">
+                      <div class="transaction-cell">{{ transaction.clearance_date | date: 'dd-MM-yy' }}</div>
+                      <div class="transaction-cell">{{ transaction.party_name || '-' }}</div>
+                      <div class="transaction-cell">{{ transaction.entry_by_name || '-' }}</div>
+                      <div class="transaction-cell">{{ transaction.transaction_type === 'credit' ? (transaction.amount | currency: 'INR':'symbol':'1.2-2') : '-' }}</div>
+                      <div class="transaction-cell">{{ transaction.transaction_type === 'debit' ? ((transaction.amount | currency: 'INR':'symbol':'1.2-2')) : '-' }}</div>
+                      <div class="transaction-cell">{{ transaction.balance | currency: 'INR':'symbol':'1.2-2'}}</div>
+                      <div class="transaction-cell">{{ transaction.method_name ||'-' }}</div>
+                      <div class="transaction-cell">{{ transaction.cheque_number || '-' }}</div>
+                      <!-- <div class="transaction-cell">{{ transaction.description || '-' }}</div> -->
+                      <div class="transaction-cell"></div>
+                     
+                      <div class="transaction-cell">
+                        <i *ngIf="transaction.description && transaction.description !== '-'" 
+                           class="fa-solid fa-comment fa-xl"  style="color: yellow; cursor: pointer;"
+                           [title]="transaction.description" 
+                           (click)="toggleRemark(i)">
+                        </i>
+                      
+                        <span *ngIf="!transaction.description || transaction.description === '-'">-</span>
+                      
+                        <span *ngIf="activeIndex === i && transaction.description && transaction.description !== '-'">
+                          {{ transaction.description }}
+                        </span>
+                      </div>
+                      
+
+                      <div class="transaction-cell">
+                        <i class="fa-solid fa-trash-can fa-flip-horizontal fa-xl" style="color: #ff0000; cursor: pointer;" 
+                        (click)="onDeleteTransaction(transaction.id)"></i>
+                        </div>
+                  
+                  </div>
+                </div>
+              </div>
+              </div>
+            </ng-template>
+          </mat-tab>
+
+          <mat-tab class="left-header" label="Transactions" >
+            <ng-template matTabContent>
+              <div>
+                <div class="filter-section">
+                <form [formGroup]="addExpenseForm" >
+
+                  <div class="custom-select-container">
+                    <input class="custom-select" type="text" 
+                    formControlName="expense_date"
+                        ngxDaterangepickerMd
+                        [(ngModel)]="selected" 
+                        [showCustomRangeLabel]="true"
+                        [alwaysShowCalendars]="false"
+                        [ranges]="ranges"
+                        [linkedCalendars]="true"
+                        [isInvalidDate]="isInvalidDate"
+                        (datesUpdated)="onDateRangeSelected($event)"
+                        placeholder="{{ selected.startDate.format('DD-MM-YYYY') }} - {{ selected.endDate.format('DD-MM-YYYY') }}"
+                           />
+                </div>
+                </form>
+                  <select id="staff-select">
+                    <option value="1">All</option>
+                    <option value="2">Owner</option>
+                  </select>
+                  <label for="staff-select"><p>Total Amount</p>
+                     <p style="text-align: right;">{{total_debit_pdc | currency: 'INR':'symbol':'1.2-2'}}</p></label>
+                 
+                  <!-- <button class="download-btn">Download</button> -->
+                </div>
+            
+                <div class="transaction-container">
+                  <div class="transaction-header">
+                    <div class="transaction-row">
+                      <div class="transaction-cell"  (click)="sortByChequeDate()">Cheque Date
+                      <i class='fas fa-sort-numeric-down' style="cursor: pointer;"></i>
+                      </div>
+                      <div class="transaction-cell">Party Name</div>
+                      <div class="transaction-cell">Entry By</div>
+                      <div class="transaction-cell">Cheque/Ref. No.</div>
+                      <div class="transaction-cell">Amount</div>
+                      <div class="transaction-cell"></div>
+                      <div class="transaction-cell"></div>
+                      <div class="transaction-cell"></div>
+                        </div>
+                  </div>
+                  
+                  <div class="transaction-body">
+                    <div *ngFor="let transaction of passbook_pdc_Details;; let i = index" class="transaction-row">                      
+                      <div class="transaction-cell" >{{ transaction.cheque_date | date: 'dd-MM-yy' }}</div>                      
+                      <div class="transaction-cell" >{{ transaction.party_name || '-' }}</div>                     
+                      <div class="transaction-cell" >{{ transaction.entry_by_name || '-' }}</div>
+                      <div class="transaction-cell" style="text-align: right;" >{{ transaction.amount | currency: 'INR':'symbol':'1.2-2' }}</div>
+                      <div class="transaction-cell" style="text-align: right;" >{{ transaction.cheque_number || '-' }}</div>
+                      <div class="transaction-cell"></div>
+                      
+                      <div class="transaction-cell">
+                        <i *ngIf="transaction.description && transaction.description !== '-'" 
+                           class="fa-solid fa-comment fa-xl" style="color: yellow;cursor: pointer;" 
+                           [title]="transaction.description" 
+                           (click)="toggleRemark(i)">
+                        </i>
+                        <span *ngIf="!transaction.description || transaction.description === '-'">-</span>
+                        <span *ngIf="activeIndex === i && transaction.description && transaction.description !== '-'">
+                          {{ transaction.description }}
+                        </span>
+                      </div>
+                      
+                      <div class="transaction-cell">
+                      <i class="fa-solid fa-trash-can fa-flip-horizontal fa-xl" style="color: #ff0000;cursor: pointer;" 
+                      (click)="onDeleteTransactionPDC(transaction.id)"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+        
+    </div>
+    <!-- </div> -->
+  </div>
+  
+  <!-- <pre>{{ totalAltra | json }}</pre> -->
+
+   </div>
+      <!-- {{bankDetails | json}} -->
+ 

@@ -1,0 +1,86 @@
+<div class="main">
+    <div class="header" style="background-color: blue;">
+        <h3>Add Transaction</h3>
+        <div class="addbutton">
+            <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="transactionForm.invalid">Add</button>
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+    </div>
+
+    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+        <div class="add-transaction-container">
+            <div class="left-side">
+                <label>Transaction Type:</label>
+                <mat-radio-group formControlName="transaction_type" [value]="'withdrawal'">
+                    <mat-radio-button value="debit">Withdrawal</mat-radio-button>
+                    <mat-radio-button value="credit">Deposit</mat-radio-button>
+                </mat-radio-group>
+
+                <label>Payment Mode:</label>
+                <mat-radio-group formControlName="payment_method_id" (change)="onPaymentModeChange($event)">
+                  <mat-radio-button *ngFor="let mode of paymentModes" [value]="mode.id">
+                    {{ mode.value }}
+                  </mat-radio-button>
+                </mat-radio-group>
+
+            </div>
+
+            <div class="right-side">
+                <div class="input-container">
+                    <mat-form-field appearance="fill" class="small-input date-picker">
+                        <mat-label>Amount</mat-label>
+                        <input matInput formControlName="amount" (keydown)="preventSpace($event)" />
+                        <mat-error *ngIf="transactionForm.get('amount')?.hasError('required') && transactionForm.get('amount')?.touched">
+                          Please enter the amount.
+                        </mat-error>
+                      </mat-form-field>
+                      
+            
+                    <mat-form-field appearance="fill" class="small-input date-picker">
+                        <input matInput [matDatepicker]="datePicker" formControlName="date" (dateChange)="onDateInputChange($event) " [max]="maxDate">
+                        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datePicker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" *ngIf="!hideFields" >
+                        <mat-label>Start Date</mat-label>
+                        <input  matInput formControlName="start_date" readonly>
+                    </mat-form-field>
+        
+                    <mat-form-field appearance="fill" *ngIf="!hideFields">
+                        <mat-label>End Date</mat-label>
+                        <input matInput formControlName="end_date" readonly>
+                    </mat-form-field>
+                </div>
+             <!-- Conditional fields for Cheque/RTGS/NEFT -->
+             <div *ngIf="showChequeAndBankFields">
+                <mat-form-field appearance="fill" class="small-input date-picker">
+                    <mat-label>Cheque/Ref. No.</mat-label>
+                    <textarea matInput formControlName="cheque_no" ></textarea>
+                    <mat-error *ngIf="transactionForm.get('cheque_no')?.hasError('required') && transactionForm.get('cheque_no')?.touched">
+                        Please enter cheque no.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="small-input date-picker">
+                    <mat-label>Party Name</mat-label>
+                    <textarea matInput formControlName="party_name" ></textarea>
+                </mat-form-field>
+            </div>
+                <div class="remark">
+                    <mat-form-field appearance="fill" class="small-input date-picker">
+                        <mat-label>Remark</mat-label>
+                        <textarea matInput formControlName="remark"></textarea>
+                    </mat-form-field>   
+                </div>
+            </div>
+            
+
+        </div>
+    </form>
+</div>
+
+
+
+
+<!-- {{bank_ac_id|json}} -->

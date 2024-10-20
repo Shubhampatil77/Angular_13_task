@@ -1,0 +1,51 @@
+* {
+  padding: 0% !important;
+}
+.bottom-sheet-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  max-height: auto;
+  justify-content: space-between;
+}
+
+.account-details {
+  margin-bottom: auto;
+}
+
+.mat-bottom-sheet-container{
+  padding: 0; 
+}
+.acc_no,
+.bank_name {
+  display: inline-block;
+  width: 25%;
+  color: blue;
+  font-weight: 400;
+}
+.action-icons {
+  display: inline-flex; /* Align action icons in a row */
+  gap: 20px; /* Add some space between icons */
+  cursor: pointer; /* Change cursor to pointer */
+  margin-left: auto; /* Push icons to the right */
+}
+.account-info {
+  margin: 5px 0;
+  margin-top: auto;
+}
+
+.info-text {
+  margin: 4px 0;
+}
+
+.account-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-account-btn {
+  margin-left: 10px;
+}
+.button {
+  margin-left: 50px;
+}

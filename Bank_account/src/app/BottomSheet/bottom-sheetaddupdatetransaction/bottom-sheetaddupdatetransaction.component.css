@@ -1,0 +1,95 @@
+*{
+  margin: 0px;
+}
+
+.main {
+  padding: 16px;
+  width: 540px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.header h2 {
+  margin: 0;
+}
+.addbutton {
+  display: flex;
+  align-items: center;
+}
+.add-transaction-container {
+  display: flex;
+  justify-content: space-between;
+}
+.left-side,
+.right-side {
+  width: 48%;
+}
+.left-side {
+  margin-right: 2%;
+}
+label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.mat-radio-group {
+  margin-bottom: 16px;
+}
+textarea {
+  resize: none; /* Prevent resizing */
+}
+button {
+  margin-top: 16px; /* Space above the button */
+}
+/* Optional: Responsive adjustments */
+@media (max-width: 768px) {
+  .add-transaction-container {
+    flex-direction: column; /* Stack the left and right sides */
+  }
+  .left-side,
+  .right-side {
+    width: 100%; /* Full width on smaller screens */
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+.right-side {
+  display: flex;
+  flex-direction: column; /* Align children vertically */
+  width: 297px; /* Ensure it uses full width */
+}
+.input-container {
+  text-align: right;
+  display: flex;
+}
+.small-input {
+  flex: 1;
+  margin-right: 10px;
+}
+.small-input:last-child {
+  margin-right: 0;
+}
+.remark {
+  width: 100%;
+}
+mat-form-field {
+  max-width: 200px;
+}
+.date-picker {
+  max-width: 150px;
+  height: 70px;
+}
+mat-form-field input {
+  height: 30px;
+  font-size: 14px;
+}
+.hidden {
+  display: none;
+}

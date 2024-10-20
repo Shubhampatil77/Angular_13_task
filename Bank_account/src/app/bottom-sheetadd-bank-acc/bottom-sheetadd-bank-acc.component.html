@@ -1,0 +1,72 @@
+<div class="main">
+  <div class="header">
+    <h2>Add Bank Account</h2>
+    <div class="addbutton">
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="bankForm.invalid">Add</button>
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <form [formGroup]="bankForm" (ngSubmit)="onSubmit()">
+    <div class="add-bank-account-container">
+      <div class="left-side">
+        <mat-form-field appearance="fill">
+          <mat-label>search Your Bank</mat-label>
+          <input matInput placeholder="Type your bank name" formControlName="bank_name" [(ngModel)]="selectedBankName" (input)="searchBank($event)"/>
+          <mat-error *ngIf="bankForm.get('bank_name')?.hasError('required') && bankForm.get('bank_name')?.touched">
+            Please enter Bank Name .
+        </mat-error>
+        </mat-form-field>
+
+        <div *ngIf="banks && banks.length > 0">
+          <mat-list>
+            <mat-list-item *ngFor="let bank of banks" (click)="selectBank(bank)">
+              <p style="cursor: pointer;">{{ bank.bank_name }}</p>
+              
+            </mat-list-item>
+          </mat-list>
+          <input type="hidden" formControlName="bank_id" />
+        </div>
+
+        <div>
+          <label>Account Type:</label>
+          <mat-radio-group formControlName="account_type">
+            <mat-radio-button value="saving">Saving</mat-radio-button>
+            <mat-radio-button value="current">Current</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <mat-checkbox (change)="togglePrimaryAccount($event)" [checked]="isPrimaryAccount === 'yes'">
+          Primary Account
+        </mat-checkbox>
+              </div>
+
+      <div class="right-side">
+        <mat-form-field appearance="fill">
+          <mat-label>Account Number</mat-label>
+          <input matInput placeholder="Enter your account number" formControlName="account_no" />
+          <!-- <mat-error *ngIf="bankForm.get('account_no')?.hasError('required') && bankForm.get('account_no')?.touched">
+            Please enter Acc.
+        </mat-error> -->
+        <mat-error *ngIf="bankForm.get('account_no')?.hasError('required')">
+          Account number is required.
+        </mat-error>
+        <mat-error *ngIf="bankForm.get('account_no')?.hasError('minlength')">
+          Account number must be at least 10 characters long.
+        </mat-error>
+        <mat-error *ngIf="bankForm.get('account_no')?.hasError('maxlength')">
+          Account number cannot exceed 16 characters.
+        </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>IFSC Code</mat-label>
+          <input matInput placeholder="Enter IFSC code" formControlName="ifsc_code" (input)="toUpperCase($event)"/>
+          <mat-error *ngIf="bankForm.get('ifsc_code')?.hasError('required') && bankForm.get('ifsc_code')?.touched">
+            Please enter IFSC code.
+        </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+ 
